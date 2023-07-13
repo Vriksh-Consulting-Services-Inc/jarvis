@@ -7,7 +7,7 @@ PROMPT = "Tell me a dad joke"
 
 def chat_with_gpt(request):
     request_json = request.get_json()
-    message = request_json['message']
+    message = request_json['message'] if request_json and 'message' in request_json else 'Tell me a short joke'
     
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
