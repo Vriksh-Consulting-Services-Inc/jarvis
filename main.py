@@ -7,10 +7,10 @@ PROMPT = "Tell me a dad joke"
 
 def chat_with_gpt(request):
     request_json = request.get_json()
-    message = request_json['message'] if request_json and 'message' in request_json else 'Tell me a short joke'
+    message = request_json['message'] if 'message' in request_json else 'Tell me a unique, random fact in less than 50 words.'
     
     messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "system", "content": "You are a helpful assistant named Jarvis."},
         {"role": "user", "content": message}
     ]
     response = openai.ChatCompletion.create(
@@ -23,5 +23,30 @@ def chat_with_gpt(request):
     response = response['choices'][0]['message']['content']
     return response
     
-    # Return the reply in the response
-    return {'reply': reply}
+
+
+def handleWebhook(request):
+    req = request.get_json()
+    print(req)
+
+    responseText = ""
+    intent = req["queryResult"]["intent"]["displayName"]
+
+    if intent == "Default Welcome Intent":
+        #responseText = "Hello from a GCF Webhook"
+        responseText = chat_with_gpt(request)
+    elif intent == "get-agent-name":
+        responseText = "My name is Flowhook"
+    else:
+        responseText = f"There are no fulfillment responses defined for Intent {intent}"
+    
+    message = {'message': req['queryResult']['queryText']}
+    print('Input message: ', message)
+    responseText = chat_with_gpt(message)
+    print('Response: ', responseText)
+
+    # You can also use the google.cloud.dialogflowcx_v3.types.WebhookRequest protos instead of manually writing the json object
+    res = {"fulfillmentMessages": [{"text": {"text": [responseText]}}]}
+
+    return res
+

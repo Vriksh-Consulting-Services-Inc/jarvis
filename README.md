@@ -11,3 +11,8 @@ curl -m 70 -X POST https://us-central1-prag-2019.cloudfunctions.net/vriksh-jarvi
 -H "Authorization: bearer $(gcloud auth print-identity-token)" \
 -H "Content-Type: application/json" \
 -d '{"message":"Tell me a 10 worded horror story"}'
+
+
+curl -m 70 -X POST https://us-central1-prag-2019.cloudfunctions.net/vriksh-jarvis-v1 \
+-H "Content-Type: application/json" \
+-d '{}'
