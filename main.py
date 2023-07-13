@@ -6,7 +6,7 @@ MODEL = "gpt-3.5-turbo"
 PROMPT = "Tell me a dad joke"
 
 def chat_with_gpt(request):
-    request_json = request.get_json()
+    request_json = request #request.get_json()
     message = request_json['message'] if 'message' in request_json else 'Tell me a unique, random fact in less than 50 words.'
     
     messages=[
@@ -41,9 +41,8 @@ def handleWebhook(request):
         responseText = f"There are no fulfillment responses defined for Intent {intent}"
     
     message = {'message': req['queryResult']['queryText']}
-    print('Input message: ', message)
     responseText = chat_with_gpt(message)
-    print('Response: ', responseText)
+    print({'message': message, 'response': responseText})
 
     # You can also use the google.cloud.dialogflowcx_v3.types.WebhookRequest protos instead of manually writing the json object
     res = {"fulfillmentMessages": [{"text": {"text": [responseText]}}]}
