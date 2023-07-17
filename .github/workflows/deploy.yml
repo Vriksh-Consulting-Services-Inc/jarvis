@@ -11,7 +11,7 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup Google Cloud CLI
       uses: google-github-actions/setup-gcloud@v1.1.1
@@ -23,4 +23,9 @@ jobs:
 
     - name: Deploy to Cloud Functions
       run: |
-        gcloud functions deploy vriksh-jarvis-v1 --runtime python310 --trigger-http --allow-unauthenticated --entry-point handleWebhook --project prag-2019
+        gcloud functions deploy vriksh-jarvis-v1 \
+          --runtime python310 \
+          --trigger-http \
+          --allow-unauthenticated \
+          --entry-point handleWebhook \
+          --project prag-2019
