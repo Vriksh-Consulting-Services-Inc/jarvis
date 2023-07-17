@@ -17,9 +17,11 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1.1.1
 
     - name: Authenticate with Google Cloud
-      uses: google-github-actions/auth@v1.1.1
+      id: auth
+      uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{ secrets.GCP_SA_KEY }}
+        service_account: 'vriksh-jarvis@prag-2019.iam.gserviceaccount.com'
 
     - name: Deploy to Cloud Functions
       run: |
