@@ -11,15 +11,16 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@main
+    - name: Setup Google Cloud CLI
+      uses: google-github-actions/setup-gcloud@v1.1.1
+
+    - name: Authenticate with Google Cloud
+      uses: google-github-actions/auth@v1.1.1
       with:
-        service_account_key: ${{ secrets.GCP_SA_KEY }}
-        project_id: prag-2019
-        export_default_credentials: true
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
 
     - name: Deploy to Cloud Functions
       run: |
-        gcloud functions deploy vriksh-jarvis-v1 --runtime python310 --trigger-http --allow-unauthenticated --entry-point handleWebhook
+        gcloud functions deploy vriksh-jarvis-v1 --runtime python310 --trigger-http --allow-unauthenticated --entry-point handleWebhook --project prag-2019
