@@ -29,5 +29,5 @@ jobs:
           --runtime python310 \
           --trigger-http \
           --allow-unauthenticated \
-          --entry-point handleWebhook \
+          --entry-point chat_with_gpt \
           --project prag-2019

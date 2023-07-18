@@ -21,7 +21,7 @@ openai.api_key = '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'
 MODEL = "gpt-3.5-turbo"
 PROMPT = "Tell me a dad joke"
 
-def chat_with_gpt(request):
+def chat_with_gpt111(request):
     request_json = request #request.get_json()
     message = request_json['message'] if 'message' in request_json else 'Tell me a unique, random fact in less than 50 words.'
     
@@ -41,7 +41,7 @@ def chat_with_gpt(request):
     
 
 
-def handleWebhook(request):
+def handleWebhook111(request):
     req = request.get_json()
     print(req)
 
