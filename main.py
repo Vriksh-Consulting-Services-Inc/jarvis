@@ -8,7 +8,7 @@ def chat_with_gpt(request):
     message = request_json['message'] if 'message' in request_json else 'Tell me a unique, random fact in less than 50 words.'
     chat_context = request_json['chat_context'] if 'chat_context' in request_json else 'You are a helpful assistant named Jarvis'
     api_key = request_json['token'] if 'token' in request_json else None
-    MODEL = request_json['token'] if 'model' in request_json else 'gpt-3.5-turbo'
+    MODEL = request_json['model'] if 'model' in request_json else 'gpt-3.5-turbo'
 
     response = 'You must pass an Open API key under token parameter.'
 
